@@ -6,7 +6,7 @@ export default function TextForm() {
   const navigate = useNavigate();
 
   const handleUpClick = () => {
-    // console.log("UpperCase was clicked " + text);
+    console.log("UpperCase was clicked " + text);
     console.log(text);
     let newtext = text.content.toUpperCase();
     setText(newtext);
