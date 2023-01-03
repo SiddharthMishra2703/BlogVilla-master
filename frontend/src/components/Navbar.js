@@ -8,7 +8,7 @@ export default function Navbar() {
         <nav className="navbar navbar-expand-lg color-nav sticky-top">
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">
-                    <img src=""  className="d-inline-block align-top img" alt="logo" />
+                    <img src="/image/navlogo.webp"  className="d-inline-block align-top img" alt="logo" />
                     BlogVilla
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

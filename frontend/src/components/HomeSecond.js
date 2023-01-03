@@ -20,7 +20,7 @@ export default function HomeSecond() {
                             <div className="card-body ">
                                 <h5 className="card-title">Write What You See</h5>
                                 <p className="card-text">You can share your knowledge from what you see in your life which grabs your reader's attention. Cheak it out now! </p>
-                                <p className="card-text"><Link className="btn btn-primary btn-sm" to="/writeBlog">Get Started Now</Link></p>
+                                <p className="card-text"><Link className="btn btn-primary btn-sm rounded-pill" to="/writeBlog">Get Started Now</Link></p>
                             </div>
                         </div>
                     </div>
@@ -34,7 +34,7 @@ export default function HomeSecond() {
                             <div className="card-body ">
                                 <h5 className="card-title">Read from other's blog</h5>
                                 <p className="card-text">You can find topics form your intrest and cheak out what other's are writing form their knowledge.</p>
-                                <p className="card-text"><Link className="btn btn-primary btn-sm" to="/blogs">Read Now</Link></p>
+                                <p className="card-text"><Link className="btn btn-primary btn-sm rounded-pill" to="/blogs">Read Now</Link></p>
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@ export default function HomeSecond() {
                             <div className="card-body ">
                                 <h5 className="card-title">Connect With People</h5>
                                 <p className="card-text">You can write a blog about beautiful things what you see in your life which grabs your reader's attention. Cheak it out now! </p>
-                                <p className="card-text"><Link className="btn btn-primary btn-sm" to="/register">Register Now</Link></p>
+                                <p className="card-text"><Link className="btn btn-primary btn-sm rounded-pill" to="/register">Register Now</Link></p>
                             </div>
                         </div>
                     </div>

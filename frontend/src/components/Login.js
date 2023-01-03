@@ -59,7 +59,7 @@ export default function Login() {
 
               <Link className='link-secondary' to="/register">I'm new here! Create New Account.</Link>
               <div className="input-group flex-nowrap my-5">
-                <button type="submit" className="btn btn-outline-primary" onClick={loginUser}>Login</button>
+                <button type="submit" className="btn btn-outline-primary " onClick={loginUser}>Login</button>
               </div>
             </form>
           </div>

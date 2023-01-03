@@ -99,7 +99,7 @@ export default function Register() {
 
               <Link className='link-secondary' to="/login">I already have an account</Link>
               <div className="input-group flex-nowrap my-5">
-                <button type="submit" className="btn btn-outline-primary" onClick={PostData} value="Register">Register</button>
+                <button type="submit" className="btn btn-outline-primary " onClick={PostData} value="Register">Register</button>
               </div>
             </form>
           </div>
