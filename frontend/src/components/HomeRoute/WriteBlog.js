@@ -6,25 +6,25 @@ export default function TextForm() {
   const navigate = useNavigate();
 
   const handleUpClick = () => {
-    console.log("UpperCase was clicked " + text);
-    console.log(text);
+    // console.log("UpperCase was clicked " + text);
+    // console.log(text);
     let newtext = text.content.toUpperCase();
     setText(newtext);
   }
 
   const handleLoClick = () => {
-    let newtext = text.toLowerCase();
+    let newtext = text.content.toLowerCase();
     setText(newtext);
   }
 
   const handleFirstClick = () => {
     if (text === text.toUpperCase()) {
-      let newtext = text.charAt() + text.slice(1).toLowerCase();
+      let newtext = text.content.charAt() + text.content.slice(1).toLowerCase();
       setText(newtext);
     }
     else {
-      let nt = text.charAt();
-      let newtext = nt.toUpperCase() + text.slice(1);
+      let nt = text.content.charAt();
+      let newtext = nt.toUpperCase() + text.content.slice(1);
       setText(newtext);
     }
   }
