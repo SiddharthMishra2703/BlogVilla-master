@@ -24,7 +24,7 @@ export default function Login() {
 
     const data = await res.json();
 
-    if (res.status === 422 || !data) {
+    if (res.status === 400 || !data) {
       window.alert("Invalid Details");
     } else {
       window.alert("Login Successfully");
