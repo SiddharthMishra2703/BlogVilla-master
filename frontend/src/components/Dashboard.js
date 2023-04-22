@@ -39,30 +39,29 @@ export default function Dashboard() {
     callDashboardPage();
   }, []);
 
-  const DeleteBlog = async () => {
-    // e.preventDefault();
+//   const DeleteBlog = async (e) => {
+//     e.preventDefault();
 
-    // const  userId = userData._Id; 
-    // const  blogId = e;
-    console.log("hello");
+//     const  userId = userData._Id; 
+//     const  blogId = e;
+//     console.log("hello");
 
-    // try {
+//     try {
 
-    //   const res = await fetch('/blogDelete', {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //       userId,
-    //       blogId
-    //     })
-    //   });
-    // } catch (err) {
-    //   console.log(err);
-    //   // navigate('/login');
-    // }
-  }
+//       const res = await fetch('/blogDelete', {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//           userId,
+//           blogId
+//         })
+//       });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
 
   
 
@@ -124,16 +123,35 @@ export default function Dashboard() {
                 <div className="col-md-3 fs-5">
                   <Link to={"/blogs/" + blog._id} className="btn btn-sm btn-outline-primary">Go To Blog</Link>
                 </div>
-                {/* <form method="POST" > */}
                   <div className="col-md-1 fs-5">
-                    <button type="submit" onClick={DeleteBlog} value={blog._id} className="btn btn-outline-danger btn-sm mx-2">
+                    <button type="button" onClick={async (e)=>{
+
+                        e.preventDefault();
+                        const  userId = userData._Id; 
+                        const  blogId = blog._id;
+                    
+                        try {
+                    
+                          const res = await fetch('/blogDelete', {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                              userId,
+                              blogId
+                            })
+                          });
+                        } catch (err) {
+                          console.log(err);
+                        }
+                    }} value={blog._id} className="btn btn-outline-danger btn-sm mx-2">
                       <i className="zmdi zmdi-delete"></i>
                     </button>
                     <button type="button" className="btn btn-outline-primary btn-sm">
                       <i class="zmdi zmdi-edit"></i>
                     </button>
                   </div>
-                {/* </form> */}
               </div>
             ))}
           </div>
