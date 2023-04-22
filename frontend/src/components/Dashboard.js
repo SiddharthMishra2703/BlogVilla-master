@@ -39,12 +39,12 @@ export default function Dashboard() {
     callDashboardPage();
   }, []);
 
-  const DeleteBlog = async (e) => {
+  const DeleteBlog = async () => {
     // e.preventDefault();
 
-    const  userId = userData._Id; 
+    // const  userId = userData._Id; 
     // const  blogId = e;
-    console.log(e);
+    console.log("hello");
 
     // try {
 
@@ -124,16 +124,16 @@ export default function Dashboard() {
                 <div className="col-md-3 fs-5">
                   <Link to={"/blogs/" + blog._id} className="btn btn-sm btn-outline-primary">Go To Blog</Link>
                 </div>
-                <form method="POST" >
+                {/* <form method="POST" > */}
                   <div className="col-md-1 fs-5">
-                    <button type="submit" onClick={(e)=>DeleteBlog(e, 'value')} value={blog._id} className="btn btn-outline-danger btn-sm mx-2">
+                    <button type="submit" onClick={DeleteBlog} value={blog._id} className="btn btn-outline-danger btn-sm mx-2">
                       <i className="zmdi zmdi-delete"></i>
                     </button>
                     <button type="button" className="btn btn-outline-primary btn-sm">
                       <i class="zmdi zmdi-edit"></i>
                     </button>
                   </div>
-                </form>
+                {/* </form> */}
               </div>
             ))}
           </div>
