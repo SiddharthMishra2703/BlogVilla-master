@@ -3,6 +3,7 @@ import './css/Dashboard.css'
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+
 export default function Dashboard() {
 
   const navigate = useNavigate();
@@ -38,32 +39,6 @@ export default function Dashboard() {
   useEffect(() => {
     callDashboardPage();
   }, []);
-
-//   const DeleteBlog = async (e) => {
-//     e.preventDefault();
-
-//     const  userId = userData._Id; 
-//     const  blogId = e;
-//     console.log("hello");
-
-//     try {
-
-//       const res = await fetch('/blogDelete', {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//           userId,
-//           blogId
-//         })
-//       });
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-
-  
 
   return (
 
@@ -126,45 +101,45 @@ export default function Dashboard() {
                   <div className="col-md-1 fs-5">
                     <button type="button" onClick={async (e)=>{
 
-                        e.preventDefault();
+                      e.preventDefault();
 
-                        const userId=userData._id;
-                        const blogId=blog._id;
-                        try {
-
+                      const userId=userData._id;
+                      const blogId=blog._id;
+                      try {
+                  
                         const res = await fetch('/blogDelete', {
-                            method: "POST",
-                            headers: {
+                          method: "POST",
+                          headers: {
                             "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
+                          },
+                          body: JSON.stringify({
                             userId,
                             blogId
-                            })
+                          })
                         });
-
+                  
                         const data = await res.json();
-
+                  
                         if (res.status === 422 || !data) {
-                            window.alert("Invalid Blog");
-                            console.log("Invalid Blog");
+                          window.alert("Invalid Blog");
+                          console.log("Invalid Blog");
                         } else {
-                            window.alert("Blog saved successfuly");
-                            console.log("Blog saved successfuly");
-
-                            // navigate('/dashboard');
+                          window.alert("Blog saved successfuly");
+                          console.log("Blog saved successfuly");
+                  
+                          navigate('/dashboard');
                         }
-
-                        } catch (err) {
+                  
+                      } catch (err) {
                         console.log(err);
-                        //   navigate('/login');
-                        }
-
-                    }} value={blog._id} className="btn btn-outline-danger btn-sm mx-2">
+                        navigate('/dashboard');
+                      }
+                      window.location.reload();
+                    }} className="btn btn-outline-danger btn-sm mx-2">
                       <i className="zmdi zmdi-delete"></i>
                     </button>
                     <button type="button" className="btn btn-outline-primary btn-sm">
-                      <i class="zmdi zmdi-edit"></i>
+                      <i className="zmdi zmdi-edit"></i>
                     </button>
                   </div>
               </div>
