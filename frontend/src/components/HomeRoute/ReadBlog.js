@@ -48,7 +48,7 @@ export default function Blogs() {
           </button>
         </div>
       </div>
-      <Comments />
+      <Comments blogId={blog._id} />
     </>
   )
 }
