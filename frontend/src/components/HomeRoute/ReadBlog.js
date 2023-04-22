@@ -1,4 +1,5 @@
 import React from 'react'
+import Comments from './Comments';
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react'
 
@@ -33,15 +34,21 @@ export default function Blogs() {
     getData();
   }, []);
   const blog = userData;
-  
-  return (
 
+  return (
+    <>
       <div className="card w-50 shadow mx-auto my-5" >
         <div className="card-body">
           <h5 className="card-title">{blog.title}</h5>
           <h6 className="card-subtitle mb-2 text-muted">{blog.topic}</h6>
           <p className="card-text">{blog.content}</p>
+          <hr/>
+          <button type="button" className="btn btn-outline-danger btn-sm">
+            <i className="zmdi zmdi-favorite"></i>
+          </button>
         </div>
       </div>
+      <Comments />
+    </>
   )
 }
