@@ -127,24 +127,39 @@ export default function Dashboard() {
                     <button type="button" onClick={async (e)=>{
 
                         e.preventDefault();
-                        const  userId = userData._Id; 
-                        const  blogId = blog._id;
-                    
+
+                        const userId=userData._id;
+                        const blogId=blog._id;
                         try {
-                    
-                          const res = await fetch('/blogDelete', {
+
+                        const res = await fetch('/blogDelete', {
                             method: "POST",
                             headers: {
-                              "Content-Type": "application/json"
+                            "Content-Type": "application/json"
                             },
                             body: JSON.stringify({
-                              userId,
-                              blogId
+                            userId,
+                            blogId
                             })
-                          });
-                        } catch (err) {
-                          console.log(err);
+                        });
+
+                        const data = await res.json();
+
+                        if (res.status === 422 || !data) {
+                            window.alert("Invalid Blog");
+                            console.log("Invalid Blog");
+                        } else {
+                            window.alert("Blog saved successfuly");
+                            console.log("Blog saved successfuly");
+
+                            // navigate('/dashboard');
                         }
+
+                        } catch (err) {
+                        console.log(err);
+                        //   navigate('/login');
+                        }
+
                     }} value={blog._id} className="btn btn-outline-danger btn-sm mx-2">
                       <i className="zmdi zmdi-delete"></i>
                     </button>
