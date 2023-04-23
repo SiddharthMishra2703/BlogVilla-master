@@ -98,9 +98,9 @@ export default function Dashboard() {
                 <div className="col-md-3 fs-5">
                   <Link to={"/blogs/" + blog._id} className="btn btn-sm btn-outline-primary">Go To Blog</Link>
                 </div>
-                {/* <form method="POST" > */}
                   <div className="col-md-1 fs-5">
                     <button type="button" onClick={async (e)=>{
+
                       e.preventDefault();
 
                       const userId=userData._id;
@@ -142,7 +142,6 @@ export default function Dashboard() {
                       <i className="zmdi zmdi-edit"></i>
                     </button>
                   </div>
-                {/* </form> */}
               </div>
             ))}
           </div>
