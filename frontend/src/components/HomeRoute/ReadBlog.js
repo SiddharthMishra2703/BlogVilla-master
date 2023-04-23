@@ -5,50 +5,85 @@ import { useEffect, useState } from 'react'
 
 
 export default function Blogs() {
-  const url = window.location.href;
-  const blogId = url.slice(-24);
-  const [userData, setUserData] = useState({});
-  const getData = async () => {
-    try {
-      const res = await fetch('/blog/' + blogId, {
-        method: "GET",
-        headers: {
-          Accept: "appllication/json",
-          "Content-Type": "application/json"
-        },
-        credentials: "include"
-      });
+    const url = window.location.href;
+    const blogId = url.slice(-24);
+    const [userData, setUserData] = useState({});
+    const getData = async () => {
+        try {
+            const res = await fetch('/blog/' + blogId, {
+                method: "GET",
+                headers: {
+                    Accept: "appllication/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include"
+            });
 
-      const data = await res.json();
-      setUserData(data);
+            const data = await res.json();
+            setUserData(data);
 
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
+            if (!res.status === 200) {
+                const error = new Error(res.error);
+                throw error;
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
-  }
-  useEffect(() => {
-    getData();
-  }, []);
-  const blog = userData;
+    useEffect(() => {
+        getData();
+    }, []);
+    const blog = userData;
 
-  return (
-    <>
-      <div className="card w-50 shadow mx-auto my-5" >
-        <div className="card-body">
-          <h5 className="card-title">{blog.title}</h5>
-          <h6 className="card-subtitle mb-2 text-muted">{blog.topic}</h6>
-          <p className="card-text">{blog.content}</p>
-          <hr/>
-          <button type="button" className="btn btn-outline-danger btn-sm">
-            <i className="zmdi zmdi-favorite"></i>
-          </button>
-        </div>
-      </div>
-      <Comments />
-    </>
-  )
+    return (
+        <>
+            <div className="card w-50 shadow mx-auto my-5" >
+                <div className="card-body">
+                    <h5 className="card-title">{blog.title}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">{blog.topic}</h6>
+                    <p className="card-text">{blog.content}</p>
+                    <hr />
+                    <button type="button" onClick={async (e) => {
+
+                        e.preventDefault();
+
+                        const blogId = blog._id;
+                        try {
+
+                            const res = await fetch('/like', {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    blogId
+                                })
+                            });
+
+                            const data = await res.json();
+
+                            if (res.status === 422 || !data) {
+                                window.alert("Invalid Blog");
+                                console.log("Invalid Blog");
+                            } else {
+                                window.alert("Blog saved successfuly");
+                                console.log("Blog saved successfuly");
+
+                                // navigate('/dashboard');
+                            }
+
+                        } catch (err) {
+                            console.log(err);
+                            //   navigate('/login');
+                        }
+                        window.location.reload();
+                    }} className="btn btn-outline-danger btn-sm">
+                        <i className="zmdi zmdi-favorite"></i>
+                        <span>     {blog.likes}</span>
+                    </button>
+                </div>
+            </div>
+            <Comments blogId={blog._id} />
+        </>
+    )
 }
