@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Comments() {
+export default function Comments(props) {
 
     const PostData = async (e) => {
         e.preventDefault();
