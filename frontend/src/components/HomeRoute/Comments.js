@@ -42,7 +42,7 @@ export default function Comments(props) {
                             console.log(err);
                             //   navigate('/login');
                         }
-
+                        window.location.reload();
                     }} type="button" id="button-addon2">Post</button>
                 </div>
                 {/* <input type="text" className="form-control" placeholder="Add a comment..." /> */}

@@ -98,63 +98,100 @@ export default function Dashboard() {
                 <div className="col-md-3 fs-5">
                   <Link to={"/blogs/" + blog._id} className="btn btn-sm btn-outline-primary">Go To Blog</Link>
                 </div>
-                  <div className="col-md-1 fs-5">
-                    <button type="button" onClick={async (e)=>{
+                <div className="col-md-1 fs-5">
+                  <button type="button" onClick={async (e) => {
 
-                      e.preventDefault();
+                    e.preventDefault();
 
-                      const userId=userData._id;
-                      const blogId=blog._id;
-                      try {
-                  
-                        const res = await fetch('/blogDelete', {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json"
-                          },
-                          body: JSON.stringify({
-                            userId,
-                            blogId
-                          })
-                        });
-                  
-                        const data = await res.json();
-                  
-                        if (res.status === 422 || !data) {
-                          window.alert("Invalid Blog");
-                          console.log("Invalid Blog");
-                        } else {
-                          window.alert("Blog saved successfuly");
-                          console.log("Blog saved successfuly");
-                  
-                          navigate('/dashboard');
-                        }
-                  
-                      } catch (err) {
-                        console.log(err);
+                    const blogId = blog._id;
+                    try {
+
+                      const res = await fetch('/blogDelete', {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                          blogId
+                        })
+                      });
+
+                      const data = await res.json();
+
+                      if (res.status === 422 || !data) {
+                        window.alert("Invalid Blog");
+                        console.log("Invalid Blog");
+                      } else {
+                        window.alert("Blog saved successfuly");
+                        console.log("Blog saved successfuly");
+
                         navigate('/dashboard');
                       }
-                      window.location.reload();
-                    }} className="btn btn-outline-danger btn-sm mx-2">
-                      <i className="zmdi zmdi-delete"></i>
-                    </button>
-                    <button type="button" className="btn btn-outline-primary btn-sm">
-                      <i className="zmdi zmdi-edit"></i>
-                    </button>
-                  </div>
+
+                    } catch (err) {
+                      console.log(err);
+                      navigate('/dashboard');
+                    }
+                    window.location.reload();
+                  }} className="btn btn-outline-danger btn-sm mx-2">
+                    <i className="zmdi zmdi-delete"></i>
+                  </button>
+                  <button type="button" className="btn btn-outline-primary btn-sm">
+                    <i className="zmdi zmdi-edit"></i>
+                  </button>
+                </div>
               </div>
             ))}
           </div>
           <hr />
           <div className="row text-center my-3">
-            <div className="col-md-4 mx-auto my-4">
+            <div className="col-md-4 mx-auto my-3">
               <Link className="btn btn-outline-primary" to="/writeblog">Write A Blog</Link>
             </div>
-            <div className="col-md-4 mx-auto my-4">
+            <div className="col-md-4 mx-auto my-3">
               <Link className="btn btn-outline-primary" to="/blogs">Read Now</Link>
             </div>
-            <div className="col-md-4 mx-auto my-4">
+            <div className="col-md-4 mx-auto my-3">
               <Link className="btn btn-outline-danger" to="/logout">Log out</Link>
+            </div>
+            <div className="col-md-4 mx-auto my-3">
+              <button type="button" onClick={async (e) => {
+
+                e.preventDefault();
+
+                const userId = userData._id;
+                try {
+
+                  const res = await fetch('/userDelete', {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                      userId
+                    })
+                  });
+
+                  const data = await res.json();
+
+                  if (res.status === 422 || !data) {
+                    window.alert("Invalid Blog");
+                    console.log("Invalid Blog");
+                  } else {
+                    window.alert("Blog saved successfuly");
+                    console.log("Blog saved successfuly");
+
+                    // navigate('/dashboard');
+                  }
+
+                } catch (err) {
+                  console.log(err);
+                  // navigate('/dashboard');
+                }
+                window.location.reload();
+              }} className="btn btn-outline-danger btn-sm mx-2">
+                <i className="zmdi zmdi-delete"></i>
+              </button>
             </div>
           </div>
           <div className="card-footer text-muted">

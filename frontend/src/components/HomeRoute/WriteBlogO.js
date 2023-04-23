@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "../css/WriteBlog.css"
 import { useNavigate } from 'react-router-dom'
 
-export default function TextForm() {
+export default function WriteBlogO() {
 
   const navigate = useNavigate();
 
