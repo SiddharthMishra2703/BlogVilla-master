@@ -122,7 +122,8 @@ export default function Blogs() {
           <p className="card-text">{blog.content}</p>
           <hr />
 
-          {/* like button */}
+          {/* Blog Like button */}
+          
           <button type="button" onClick={async (e) => {
 
             e.preventDefault();
@@ -159,8 +160,9 @@ export default function Blogs() {
             window.location.reload();
           }} className="btn btn-outline-danger btn-sm">
             <i className="zmdi zmdi-favorite"></i>
-            <span>     {blog.likes}</span>
+            <span>{blog.likes}</span>
           </button>
+          
           <DelButton blog={impData.blog} blogId={blog._id}/>
 
         </div>
