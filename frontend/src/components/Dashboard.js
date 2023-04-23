@@ -145,16 +145,16 @@ export default function Dashboard() {
           </div>
           <hr />
           <div className="row text-center my-3">
-            <div className="col-md-4 mx-auto my-3">
+            <div className="col-md-3 mx-auto my-4">
               <Link className="btn btn-outline-primary" to="/writeblog">Write A Blog</Link>
             </div>
-            <div className="col-md-4 mx-auto my-3">
+            <div className="col-md-3 mx-auto my-4">
               <Link className="btn btn-outline-primary" to="/blogs">Read Now</Link>
             </div>
-            <div className="col-md-4 mx-auto my-3">
+            <div className="col-md-3 mx-auto my-4">
               <Link className="btn btn-outline-danger" to="/logout">Log out</Link>
             </div>
-            <div className="col-md-4 mx-auto my-3">
+            <div className="col-md-3 mx-auto my-4">
               <button type="button" onClick={async (e) => {
 
                 e.preventDefault();
@@ -189,8 +189,8 @@ export default function Dashboard() {
                   // navigate('/dashboard');
                 }
                 window.location.reload();
-              }} className="btn btn-outline-danger btn-sm mx-2">
-                <i className="zmdi zmdi-delete"></i>
+              }} className="btn btn-outline-danger btn-md mx-2">
+                <i className="zmdi zmdi-delete"></i> Delete User
               </button>
             </div>
           </div>

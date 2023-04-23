@@ -43,6 +43,8 @@ export default function Blogs() {
           <h6 className="card-subtitle mb-2 text-muted">{blog.topic}</h6>
           <p className="card-text">{blog.content}</p>
           <hr />
+
+          {/* Blog Like button */}
           <button type="button" onClick={async (e) => {
 
             e.preventDefault();
@@ -79,8 +81,10 @@ export default function Blogs() {
             window.location.reload();
           }} className="btn btn-outline-danger btn-sm">
             <i className="zmdi zmdi-favorite"></i>
-            <span>     {blog.likes}</span>
+            <span>{blog.likes}</span>
           </button>
+
+          {/* Blog Delete Button */}
           <button type="button" onClick={async (e) => {
 
             e.preventDefault();
