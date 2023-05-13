@@ -98,7 +98,13 @@ export default function Dashboard() {
                 <div className="col-md-3 fs-5">
                   <Link to={"/blogs/" + blog._id} className="btn btn-sm btn-outline-primary">Go To Blog</Link>
                 </div>
+                
                 <div className="col-md-1 fs-5">
+
+                  <button type="button" className="btn btn-outline-primary btn-sm">
+                    <i className="zmdi zmdi-edit"></i>
+                  </button>
+
                   <button type="button" onClick={async (e) => {
 
                     e.preventDefault();
@@ -136,9 +142,7 @@ export default function Dashboard() {
                   }} className="btn btn-outline-danger btn-sm mx-2">
                     <i className="zmdi zmdi-delete"></i>
                   </button>
-                  <button type="button" className="btn btn-outline-primary btn-sm">
-                    <i className="zmdi zmdi-edit"></i>
-                  </button>
+
                 </div>
               </div>
             ))}

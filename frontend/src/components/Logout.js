@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect , useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
 
 export default function Logout() {
+
+  const { dispatch} = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -12,6 +15,8 @@ export default function Logout() {
           "Content-Type": "application/json"
         },
       }).then((res)=>{
+        dispatch({type:"USER" , payload:false});
+
         navigate('/login', {replace: true});
         if (res.status !== 200) {
           const error = new Error(res.error);

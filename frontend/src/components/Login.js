@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState , useContext } from 'react'
 import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from '../App';
 
 export default function Login() {
+
+  const {dispatch} = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -27,8 +30,9 @@ export default function Login() {
     if (res.status === 400 || !data) {
       window.alert("Invalid Details");
     } else {
-      window.alert("Login Successfully");
+      dispatch({type:"USER" , payload:true});
 
+      window.alert("Login Successfully");
       navigate('/dashboard');
     }
 

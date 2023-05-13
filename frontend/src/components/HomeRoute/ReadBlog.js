@@ -5,53 +5,47 @@ import Comments from './Comments';
 import { useEffect, useState } from 'react'
 
 function DelButton(props) {
-    console.log(props);
-    if (props.blog == 1) {
-        return <button type="button" onClick={async (e) => {
+  console.log(props);
+  if (props.blog == 1) {
+    return <button type="button" onClick={async (e) => {
 
-            e.preventDefault();
+      e.preventDefault();
 
-            const blogId = props.blogId;
-            try {
+      const blogId = props.blogId;
+      try {
 
-                const res = await fetch('/blogDelete', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        blogId
-                    })
-                });
+        const res = await fetch('/blogDelete', {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            blogId
+          })
+        });
 
-                const data = await res.json();
+        const data = await res.json();
 
-                if (res.status === 422 || !data) {
-                    window.alert("Invalid Blog");
-                    console.log("Invalid Blog");
-                } else {
-                    window.alert("Blog saved successfuly");
-                    console.log("Blog saved successfuly");
+        if (res.status === 422 || !data) {
+          window.alert("Invalid Blog");
+          console.log("Invalid Blog");
+        } else {
+          window.alert("Blog saved successfuly");
+          console.log("Blog saved successfuly");
 
-                    // navigate('/dashboard');
-                }
+          // navigate('/dashboard');
+        }
 
-            } catch (err) {
-                console.log(err);
-                // navigate('/dashboard');
-            }
-            window.location.reload();
-        }} className="btn btn-outline-danger btn-sm mx-2">
-            <i className="zmdi zmdi-delete"></i>
-        </button>
-    }
+      } catch (err) {
+        console.log(err);
+        // navigate('/dashboard');
+      }
+      window.location.reload();
+    }} className="btn btn-outline-danger btn-sm mx-2">
+      <i className="zmdi zmdi-delete"></i>
+    </button>
+  }
 }
-
-
-
-
-
-
 
 export default function Blogs() {
   const url = window.location.href;
@@ -111,7 +105,7 @@ export default function Blogs() {
   useEffect(() => {
     getImpData();
   }, []);
-//   console.log(impData);
+  //   console.log(impData);
 
   return (
     <>
@@ -122,74 +116,24 @@ export default function Blogs() {
           <p className="card-text">{blog.content}</p>
           <hr />
 
-          {/* Blog Like button */}
-          
-          <button type="button" onClick={async (e) => {
+          <div className='d-flex bd-highlight mb-3'>
 
-            e.preventDefault();
-
-            const blogId = blog._id;
-            try {
-
-              const res = await fetch('/like', {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                  blogId
-                })
-              });
-
-              const data = await res.json();
-
-              if (res.status === 422 || !data) {
-                window.alert("Invalid Blog");
-                console.log("Invalid Blog");
-              } else {
-                window.alert("Blog saved successfuly");
-                console.log("Blog saved successfuly");
-
-                // navigate('/dashboard');
-              }
-
-            } catch (err) {
-              console.log(err);
-              //   navigate('/login');
-            }
-            window.location.reload();
-          }} className="btn btn-outline-danger btn-sm">
-            <i className="zmdi zmdi-favorite"></i>
-            <span>        {blog.likes}</span>
-          </button>
-          
-          <DelButton blog={impData.blog} blogId={blog._id}/>
-
-        </div>
-      </div>
-      <Comments blogId={blog._id} />
-      <div className="row">
-        {blog.comments && blog.comments.map((item) => (
-          <div className="col-md-6">
-            <div className="card shadow mx-auto my-5" >
-              <div className="card-body">
-                <h5 className="card-title">{item.userName}</h5>
-                <p className="card-text">{item.comment}</p>
-              </div>
+            {/* Blog Like button */}
+            <div className='p-2 bd-highlight'>
               <button type="button" onClick={async (e) => {
 
                 e.preventDefault();
 
-                const commentId = item._id;
+                const blogId = blog._id;
                 try {
 
-                  const res = await fetch('/commentDelete', {
+                  const res = await fetch('/like', {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                      commentId
+                      blogId
                     })
                   });
 
@@ -207,13 +151,80 @@ export default function Blogs() {
 
                 } catch (err) {
                   console.log(err);
-                  // navigate('/dashboard');
+                  //   navigate('/login');
                 }
                 window.location.reload();
-              }} className="btn btn-outline-danger btn-sm mx-2">
-                <i className="zmdi zmdi-delete"></i>
+              }} className="btn btn-outline-danger btn-sm">
+                <i className="zmdi zmdi-favorite"></i>
+                <span>        {blog.likes}</span>
               </button>
             </div>
+
+            {/* Blog delete botton */}
+            <div className='ms-auto p-2 bd-highlight'>
+              <DelButton blog={impData.blog} blogId={blog._id} />
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <Comments blogId={blog._id} />
+
+      {/* All Comments section */}
+      <div>
+
+        {blog.comments && blog.comments.map((item) => (
+
+          <div className="card w-50 shadow mx-auto" >
+            <div className="card-body">
+              <div className='row'>
+                <div className='col-11'>
+                  <p className="fw-bold card-title">{item.userName}</p>
+                </div>
+                <div className='col-1'>
+                  <button type="button" onClick={async (e) => {
+
+                    e.preventDefault();
+
+                    const commentId = item._id;
+                    try {
+
+                      const res = await fetch('/commentDelete', {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                          commentId
+                        })
+                      });
+
+                      const data = await res.json();
+
+                      if (res.status === 422 || !data) {
+                        window.alert("Invalid Blog");
+                        console.log("Invalid Blog");
+                      } else {
+                        window.alert("Blog saved successfuly");
+                        console.log("Blog saved successfuly");
+
+                        // navigate('/dashboard');
+                      }
+
+                    } catch (err) {
+                      console.log(err);
+                      // navigate('/dashboard');
+                    }
+                    window.location.reload();
+                  }} className="btn btn-outline-danger btn-sm mx-2">
+                    <i className="zmdi zmdi-delete"></i>
+                  </button>
+                </div>
+              </div>
+              <p className="card-text">{item.comment}</p>
+            </div>
+
           </div>
         ))}
       </div>

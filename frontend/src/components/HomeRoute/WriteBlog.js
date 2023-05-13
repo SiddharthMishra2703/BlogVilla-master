@@ -270,7 +270,30 @@ export default function WriteBlog() {
               <label htmlfor="backColor">Highlight Color</label>
             </div>
           </div>
-          <div id="text-input" value={text.content} name='content' onChange={handleOnChange} contentEditable="true"></div>
+          {/* <div id="text-input" value={text.content} name='content' onChange={handleOnChange} contentEditable="true"></div> */}
+
+          <div className="row my-4">
+            <div className="col-6">
+              <div className="input-group flex-nowrap">
+                <input type="text" className="form-control" placeholder="Enter Title" value={text.title} name='title' onChange={handleOnChange} aria-label="Username" aria-describedby="addon-wrapping" />
+              </div>
+            </div>
+            <div className="col-6">
+              <select className="form-select" value={text.topic} name='topic' onChange={handleOnChange} aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Sports">Sports</option>
+                <option value="Technology">Technology</option>
+                <option value="Science And Devlopment">Science And Devlopment</option>
+                <option value="Politices">Politices</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div className="mb-3">
+            <textarea id="text-input" className="form-control" value={text.content} name='content' onChange={handleOnChange} rows="10"></textarea>
+          </div>
+          
           <button className="btn btn-primary mx-2 my-1" onClick={handleClearClick}>Clear</button>
           <button className="btn btn-primary mx-2 my-1" onClick={PostData}>Save</button>
         </form>
