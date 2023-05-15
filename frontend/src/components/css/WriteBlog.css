@@ -67,4 +67,7 @@
   .active {
     background-color: #e0e9ff;
   }
+  .hide{
+    visibility: hidden;
+  }
   
