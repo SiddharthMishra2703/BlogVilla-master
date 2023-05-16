@@ -1,12 +1,16 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react'
-import SearchBlogs from './SearchBlogs';
+// import SearchBlogs from './SearchBlogs';
+import SearchBlogE from './SearchBlogsE';
 
 
 export default function Blogs() {
 
     const [userData, setUserData] = useState([]);
+
+    
+
     const getData = async () => {
         try {
             const res = await fetch('/blog', {
@@ -38,7 +42,8 @@ export default function Blogs() {
             <h1 className='text-center fw-bolder'>Blogs Archive</h1>
             <p className="text-muted text-center">Choose a Blog to read full content</p>
             <div className='text-center'>
-                <SearchBlogs />
+                {/* <SearchBlogs /> */}
+                <SearchBlogE placeholder="Enter Blog Name..."/>
             </div>
             <div className="row">
                 {userData.map((item) => (
