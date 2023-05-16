@@ -7,6 +7,7 @@ import Register from './components/Register';
 // import WriteBlog from './components/HomeRoute/WriteBlogO';
 // import WriteBlog from './components/HomeRoute/WriteBlog';
 import WriteBlog from './components/HomeRoute/WriteBlogE';
+import EditBlog from './components/HomeRoute/EditBlog';
 import ReadBlog from './components/HomeRoute/ReadBlog';
 import Blogs from './components/HomeRoute/Blogs';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -35,6 +36,7 @@ const App = () => {
             <Route exact path='/blogs/:id' element={<ReadBlog />} />
             <Route exact path='/blogs' element={<Blogs />} />
             <Route exact path='/logout' element={<Logout />} />
+            <Route exact path='/editBlog/:id' element={<EditBlog />} />
           </Routes>
         </Router>
       </UserContext.Provider>
