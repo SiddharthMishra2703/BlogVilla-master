@@ -101,7 +101,7 @@ export default function Dashboard() {
                 
                 <div className="col-md-1 fs-5">
 
-                  <button type="button" className="btn btn-outline-primary btn-sm">
+                  <button type="button" onClick={ () => {navigate('/editBlog/' + blog._id);}} className="btn btn-outline-primary btn-sm">
                     <i className="zmdi zmdi-edit"></i>
                   </button>
 
