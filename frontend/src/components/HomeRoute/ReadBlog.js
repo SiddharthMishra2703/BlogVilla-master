@@ -4,6 +4,8 @@ import Comments from './Comments';
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react'
 
+
+
 function DelButton(props) {
   console.log(props);
   if (props.blog == 1) {
@@ -106,6 +108,11 @@ export default function Blogs() {
     getImpData();
   }, []);
   //   console.log(impData);
+  const show = () => {
+    if(blog.content)
+        document.getElementById("content").innerHTML = blog.content;
+}
+
 
   return (
     <>
@@ -113,7 +120,7 @@ export default function Blogs() {
         <div className="card-body">
           <h5 className="card-title">{blog.title}</h5>
           <h6 className="card-subtitle mb-2 text-muted">{blog.topic}</h6>
-          <p className="card-text">{blog.content}</p>
+          <p id='content' className="card-text">{show()}</p>
           <hr />
 
           <div className='d-flex bd-highlight mb-3'>

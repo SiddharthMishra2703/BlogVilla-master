@@ -36,6 +36,39 @@ export default function Blogs() {
     useEffect(() => {
         getData();
     }, []);
+    const sorting = (val) => {
+        if(userData){
+            if(val == 1){
+                // userData.sort((a, b) => {
+                //     const aa = new Date(a.date);
+                //     const bb = new Date(b.date);
+                //     return Number(aa) - Number(bb);
+                // });
+            }
+            else if(val == 2){
+                // userData = original;
+                userData.reverse();
+            }
+            else if(val == 3){
+                userData.sort((a, b) => {
+                    return b.likes - a.likes;
+                });
+            }
+            else if(val == 4){
+                userData.sort((a, b) => {
+                    return b.content.length - a.content.length;
+                });
+            }
+            else if(val == 5){
+                userData.sort((a, b) => {
+                    return a.content.length - b.content.length;
+                });
+            }   
+            console.log(userData);
+            setUserData([...userData])
+        }
+    }
+    // sorting();
     return (
 
         <div className='container my-3'>
@@ -45,6 +78,23 @@ export default function Blogs() {
                 {/* <SearchBlogs /> */}
                 <SearchBlogE placeholder="Enter Blog Name..."/>
             </div>
+            <div className="col-6">
+                            <select id="value"  className="form-select" name='topic' aria-label="Default select example" onChange={() => sorting(document.getElementById("value").value)} >
+                                <option selected>Open this select menu</option>
+                                <option value={1}>Latest Blogs</option>
+                                <option value={2}>oldest Blogs</option>
+                                <option value={3}>Most Liked</option>
+                                <option value={4}>Longest Blogs</option>
+                                <option value={5}>Smallest Blogs</option>
+                            </select>
+                        </div>
+                        <button onClick={() => {
+                            if(userData){
+                            const date = new Date(userData[0].date);
+                            console.log(date);
+                            console.log(userData[0].date);
+                            }
+                        }}>date</button>
             <div className="row">
                 {userData.map((item) => (
                     <div className="col-md-6">
