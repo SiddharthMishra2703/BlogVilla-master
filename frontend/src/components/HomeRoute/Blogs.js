@@ -39,15 +39,14 @@ export default function Blogs() {
     const sorting = (val) => {
         if(userData){
             if(val == 1){
-                // userData.sort((a, b) => {
-                //     const aa = new Date(a.date);
-                //     const bb = new Date(b.date);
-                //     return Number(aa) - Number(bb);
-                // });
+                userData.sort((a, b) => {
+                    return new Date(b.date) - new Date(a.date);
+                });
             }
             else if(val == 2){
-                // userData = original;
-                userData.reverse();
+                userData.sort((a, b) => {
+                    return new Date(a.date) - new Date(b.date);
+                });
             }
             else if(val == 3){
                 userData.sort((a, b) => {
@@ -64,11 +63,10 @@ export default function Blogs() {
                     return a.content.length - b.content.length;
                 });
             }   
-            console.log(userData);
+            // console.log(userData);
             setUserData([...userData])
         }
     }
-    // sorting();
     return (
 
         <div className='container my-3'>
@@ -88,13 +86,6 @@ export default function Blogs() {
                                 <option value={5}>Smallest Blogs</option>
                             </select>
                         </div>
-                        <button onClick={() => {
-                            if(userData){
-                            const date = new Date(userData[0].date);
-                            console.log(date);
-                            console.log(userData[0].date);
-                            }
-                        }}>date</button>
             <div className="row">
                 {userData.map((item) => (
                     <div className="col-md-6">
@@ -102,7 +93,8 @@ export default function Blogs() {
                             <div className="card-body">
                                 <h5 className="card-title">{item.title ? item.title.slice(0, 40) : ""}</h5>
                                 <h6 className="card-subtitle mb-2 text-muted">{item.topic}</h6>
-                                <p className="card-text">{item.content ? item.content.slice(0, 40) : ""}...</p>
+                                {/* <p className="card-text">{item.content ? item.content.slice(0, 40) : ""}...</p> */}
+                                <p className="card-text" dangerouslySetInnerHTML={{__html: item.content.slice(0,40) + " ..."}} />
                                 <Link to={"/blogs/" + item._id} className="btn btn-sm btn-outline-primary rounded-pill">Read More</Link>
                             </div>
                         </div>

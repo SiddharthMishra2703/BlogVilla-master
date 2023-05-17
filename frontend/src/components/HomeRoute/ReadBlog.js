@@ -7,7 +7,6 @@ import { useEffect, useState } from 'react'
 
 
 function DelButton(props) {
-  console.log(props);
   if (props.blog == 1) {
     return <button type="button" onClick={async (e) => {
 
