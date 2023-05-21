@@ -54,7 +54,7 @@ function SearchBlogsE({ placeholder }) {
 
             <div className='searchInput'>
                 <i className="zmdi zmdi-search zmdi-hc-lg icon"></i>
-                <input type="text" placeholder={placeholder} onChange={handleFilter} />
+                <input className='shadow' type="text" placeholder={placeholder} onChange={handleFilter} />
             </div>
 
             {filteredData.length !== 0 && (
