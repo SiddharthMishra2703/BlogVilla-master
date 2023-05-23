@@ -107,10 +107,51 @@ export default function Blogs() {
   useEffect(() => {
     getImpData();
   }, []);
-  //   console.log(impData);
+    // console.log(impData);
   const show = () => {
     if (blog.content)
       document.getElementById("content").innerHTML = blog.content;
+  }
+
+
+  function CmtDelButton(props){
+    if(props.render){
+      return <button type="button" onClick={async (e) => {
+
+        e.preventDefault();
+
+        const commentId = props.commentId;
+        try {
+
+          const res = await fetch('/commentDelete', {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              commentId
+            })
+          });
+
+          const data = res.json();
+
+          if (res.status === 422 || !data) {
+            window.alert("connot Delete comment");
+          } else {
+            window.confirm("Deleting Your Comment");
+
+            // navigate('/dashboard');
+          }
+
+        } catch (err) {
+          console.log(err);
+          // navigate('/dashboard');
+        }
+        window.location.reload();
+      }} className="btn btn-outline-danger btn-sm mx-2">
+        <i className="zmdi zmdi-delete"></i>
+      </button>
+    }
   }
 
 
@@ -192,41 +233,9 @@ export default function Blogs() {
                       <p className="fw-bold card-title">{item.userName}</p>
                     </div>
                     <div className='col-1'>
-                      <button type="button" onClick={async (e) => {
-
-                        e.preventDefault();
-
-                        const commentId = item._id;
-                        try {
-
-                          const res = await fetch('/commentDelete', {
-                            method: "POST",
-                            headers: {
-                              "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                              commentId
-                            })
-                          });
-
-                          const data = res.json();
-
-                          if (res.status === 422 || !data) {
-                            window.alert("connot Delete comment");
-                          } else {
-                            window.confirm("Deleting Your Comment");
-
-                            // navigate('/dashboard');
-                          }
-
-                        } catch (err) {
-                          console.log(err);
-                          // navigate('/dashboard');
-                        }
-                        window.location.reload();
-                      }} className="btn btn-outline-danger btn-sm mx-2">
-                        <i className="zmdi zmdi-delete"></i>
-                      </button>
+                      {/* button yaha dalegi */}
+                      <CmtDelButton render={impData.userId == item.userId} commentId={item._id}/>
+                      {/* {console.log(impData.userId == item.userId)} */}
                     </div>
                   </div>
                   <p className="card-text">{item.comment}</p>
