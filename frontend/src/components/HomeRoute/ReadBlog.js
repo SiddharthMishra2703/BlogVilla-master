@@ -295,19 +295,23 @@ export default function Blogs() {
             </div>
           </div>
           <div className="col-md-4">
-            <h4 className='text-center my-5'>Recommendation For You</h4>
-            {userBlogs.slice(0, 3).map((item) => (
+            <h4 className='text-center my-5'>New Recommendation For You</h4>
+            {userBlogs.sort((a, b) => {
+              return b.likes - a.likes;
+            })
+              .slice(0, 3)
+              .map((item) => (
 
-              <div className="card shadow mx-auto" >
-                <div className="card-body">
-                  <h5 className="card-title">{item.title ? item.title.slice(0, 40) : ""}</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">{item.topic}</h6>
-                  <p className="card-text" dangerouslySetInnerHTML={{ __html: item.content.slice(0, 20) + " ..." }} />
-                  {/* <p className="card-text">content...</p> */}
-                  <Link to={"/blogs/" + item._id} className="btn btn-sm btn-outline-primary rounded-pill">Read More</Link>
+                <div className="card shadow mx-auto" >
+                  <div className="card-body">
+                    <h5 className="card-title">{item.title ? item.title.slice(0, 40) : ""}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">{item.topic}</h6>
+                    <p className="card-text" dangerouslySetInnerHTML={{ __html: item.content.slice(0, 20) + " ..." }} />
+                    {/* <p className="card-text">content...</p> */}
+                    <Link to={"/blogs/" + item._id} onClick={(e) => e.forceUpdate()} className="btn btn-sm btn-outline-primary rounded-pill">Read More</Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
