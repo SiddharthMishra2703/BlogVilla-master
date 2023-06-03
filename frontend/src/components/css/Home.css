@@ -5,3 +5,17 @@ body{
 .image{
     height: 600px;
 }
+@media (max-width: 600px) {
+    .image{
+        height: 300px;
+    }
+    .fullwidth{
+        width: 100%;
+    }
+}
+
+@media (min-width: 600px){
+    .fullwidth{
+        width: 50%;
+    }
+}

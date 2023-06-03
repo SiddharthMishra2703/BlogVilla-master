@@ -42,7 +42,7 @@ export default function Dashboard() {
 
   return (
 
-    <div className="container">
+    <div className="container-fluid">
       <form method="GET">
         <div className="card shadow text-center" >
           <div className="card-header">
@@ -53,59 +53,59 @@ export default function Dashboard() {
             <p className="card-text fs-5">{userData.work}</p>
             <hr />
             <div className="row my-4">
-              <div className="col-6 fs-5 fw-bolder">Your ID</div>
-              <div className="col-6 fs-5 text-danger">{userData._id}</div>
+              <div className="col-6 col-md-6 fs-5 fw-bolder">Your ID</div>
+              <div className="col-6 col-md-6 fs-5 text-danger">{userData._id}</div>
             </div>
             <div className="row my-4">
-              <div className="col-6 fs-5 fw-bolder">Name</div>
-              <div className="col-6 fs-5 text-danger">{userData.name}</div>
+              <div className="col-6 col-md-6 fs-5 fw-bolder">Name</div>
+              <div className="col-6 col-md-6 fs-5 text-danger">{userData.name}</div>
             </div>
             <div className="row my-4">
-              <div className="col-6 fs-5 fw-bolder">Email Address</div>
-              <div className="col-6 fs-5 text-danger">{userData.email}</div>
+              <div className="col-6 col-md-6 fs-5 fw-bolder">Email Address</div>
+              <div className="col-6 col-md-6 fs-5 text-danger">{userData.email}</div>
             </div>
             <div className="row my-4">
-              <div className="col-6 fs-5 fw-bolder">Phone</div>
-              <div className="col-6 fs-5 text-danger">{userData.phone}</div>
+              <div className="col-6 col-md-6 fs-5 fw-bolder">Phone</div>
+              <div className="col-6 col-md-6 fs-5 text-danger">{userData.phone}</div>
             </div>
             <div className="row my-4">
-              <div className="col-6 fs-5 fw-bolder">Work</div>
-              <div className="col-6 fs-5 text-danger">{userData.work}</div>
+              <div className="col-6 col-md-6 fs-5 fw-bolder">Work</div>
+              <div className="col-6 col-md-6 fs-5 text-danger">{userData.work}</div>
             </div>
             <hr />
             <h2 className="card-title">Your Blogs</h2>
 
             <div className="row my-4">
-              <div className="col-md-4 fs-5">
+              <div className="col-4 col-md-4 fs-5">
                 <h4>Title</h4>
               </div>
-              <div className="col-md-4 fs-5">
+              <div className="col-4 col-md-4 fs-5">
                 <h4>Topic</h4>
               </div>
-              <div className="col-md-4 fs-5">
+              <div className="col-4 col-md-4 fs-5">
                 <h4>Link</h4>
               </div>
             </div>
 
             {userData.blogs && userData.blogs.map((blog) => (
-              <div className="row my-3">
-                <div className="col-md-4 fs-5">
+              <div className="row container-fluid my-3">
+                <div className="col-4 col-md-4 fs-5">
                   {blog.title}
                 </div>
-                <div className="col-md-4 fs-5">
+                <div className="col-4 col-md-4 fs-5">
                   {blog.topic}
                 </div>
-                <div className="col-md-3 fs-5">
+                <div className="col-3 col-md-3 fs-5">
                   <Link to={"/blogs/" + blog._id} className="btn btn-sm btn-outline-primary">Go To Blog</Link>
                 </div>
                 
-                <div className="col-md-1 fs-5">
+                <div className="col-1 col-md-1 fs-5">
 
                   <button type="button" onClick={ () => {navigate('/editBlog/' + blog._id);}} className="btn btn-outline-primary btn-sm">
                     <i className="zmdi zmdi-edit"></i>
                   </button>
 
-                  <button type="button" onClick={async (e) => {
+                  <button  type="button" onClick={async (e) => {
                     const stop = window.confirm("Deleting Your Blog");
                     if(! stop){
                         return 0;
@@ -143,7 +143,7 @@ export default function Dashboard() {
                       navigate('/dashboard');
                     }
                     // window.location.reload();
-                  }} className="btn btn-outline-danger btn-sm mx-2">
+                  }} className="notVisible btn btn-outline-danger btn-sm mx-2">
                     <i className="zmdi zmdi-delete"></i>
                   </button>
 
@@ -152,17 +152,17 @@ export default function Dashboard() {
             ))}
           </div>
           <hr />
-          <div className="row text-center my-3">
-            <div className="col-md-3 mx-auto my-4">
+          <div className="row container-fluid text-center my-3">
+            <div className="col-3 col-md-3 mx-auto my-4">
               <Link className="btn btn-outline-primary" to="/writeblog">Write A Blog</Link>
             </div>
-            <div className="col-md-3 mx-auto my-4">
+            <div className="col-3 col-md-3 mx-auto my-4">
               <Link className="btn btn-outline-primary" to="/blogs">Read Now</Link>
             </div>
-            <div className="col-md-3 mx-auto my-4">
+            <div className="col-3 col-md-3 mx-auto my-4">
               <Link className="btn btn-outline-danger" to="/logout">Log out</Link>
             </div>
-            <div className="col-md-3 mx-auto my-4">
+            <div className="col-3 col-md-3 mx-auto my-4">
               <button type="button" onClick={async (e) => {
                 const stop = window.confirm("Deleting Your Account");
                 if(! stop){

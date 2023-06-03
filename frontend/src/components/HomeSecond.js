@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import './css/Home.css'
 
 
 export default function HomeSecond() {
@@ -8,10 +9,10 @@ export default function HomeSecond() {
             <div className="card mx-10" style={{backgroundColor: "whitesmoke"}}>
             {/* <div className="card mx-10"> */}
                 <div className="mx-auto mt-5">
-                    <h1 className='card-title fw-bolder'>What We Got For You</h1>
-                    <p className='text-mute'>Don't Know Where To Start From Don't Worry We Got You</p>
+                    <h1 className='card-title fw-bolder text-center'>What We Got For You</h1>
+                    <p className='text-mute text-center'>Don't Know Where To Start. Don't Worry We Got You.</p>
                 </div>
-                <div className="card shadow my-4 mx-auto w-50" >
+                <div className="card fullwidth shadow my-4 mx-auto" >
                     <div className="row g-0">
                         <div className="col-md-4">
                             <img src="/image/writing2.jpeg" className="img-fluid rounded-start" alt="..." />
@@ -25,7 +26,7 @@ export default function HomeSecond() {
                         </div>
                     </div>
                 </div>
-                <div className="card shadow my-4 mx-auto w-50" >
+                <div className="card fullwidth shadow my-4 mx-auto" >
                     <div className="row g-0">
                         <div className="col-md-4">
                             <img src="/image/reading2.jpeg" className="img-fluid rounded-start" alt="..." />
@@ -39,7 +40,7 @@ export default function HomeSecond() {
                         </div>
                     </div>
                 </div>
-                <div className="card shadow my-4 mx-auto w-50" >
+                <div className="card fullwidth shadow my-4 mx-auto" >
                     <div className="row g-0">
                         <div className="col-md-4">
                             <img src="/image/connect-card.webp" className="img-fluid rounded-start" alt="..." />

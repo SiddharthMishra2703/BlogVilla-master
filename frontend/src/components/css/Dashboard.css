@@ -1,3 +1,5 @@
-/* body{
-    background-color: #dbeeff;
-} */
+@media (max-width: 370px) {
+    .notVisible{
+        visibility: hidden;
+    }
+}
