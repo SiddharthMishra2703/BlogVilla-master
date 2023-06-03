@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import Comments from './Comments';
-// import DelButton from "./DelButton";
-// import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 function DelButton(props) {
+  const navigate = useNavigate();
   if (props.blog === 1) {
     return <button type="button" onClick={async (e) => {
+      const stop = window.confirm("Deleting Your Blog");
+      if (!stop) {
+        return 0;
+      }
 
       e.preventDefault();
 
@@ -29,20 +32,19 @@ function DelButton(props) {
         const data = await res.json();
 
         if (res.status === 422 || !data) {
-          window.alert("Invalid Blog");
-          console.log("Invalid Blog");
+          window.alert("Blog not deleted");
+          console.log("Blog not deleted");
         } else {
-          window.alert("Blog saved successfuly");
-          console.log("Blog saved successfuly");
+          window.alert("Blog deleted successfuly");
+          console.log("Blog deleted successfuly");
 
-          // navigate('/dashboard');
+          navigate('/dashboard');
         }
 
       } catch (err) {
         console.log(err);
-        // navigate('/dashboard');
+        navigate('/dashboard');
       }
-      window.location.reload();
     }} className="btn btn-outline-danger btn-sm mx-2">
       <i className="zmdi zmdi-delete"></i>
     </button>
@@ -50,6 +52,11 @@ function DelButton(props) {
 }
 
 export default function Blogs() {
+  const navigate = useNavigate();
+  const [change, forceUpdate] = useReducer(x => x + 1, 0);
+  const getBack = () => {
+    forceUpdate();
+  }
   const url = window.location.href;
   const blogId = url.slice(-24);
   const [userData, setUserData] = useState({});
@@ -77,7 +84,7 @@ export default function Blogs() {
   }
   useEffect(() => {
     getData();
-  }, []);
+  }, [change]);
   const blog = userData;
 
 
@@ -106,7 +113,7 @@ export default function Blogs() {
       console.log(error);
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     getBlogs();
   }, []);
 
@@ -132,6 +139,7 @@ export default function Blogs() {
       }
     } catch (err) {
       console.log(err);
+      setImpData({ error: "unauthorized" })
     }
   }
   useEffect(() => {
@@ -147,6 +155,10 @@ export default function Blogs() {
   function CmtDelButton(props) {
     if (props.render) {
       return <button type="button" onClick={async (e) => {
+        const stop = window.confirm("Deleting Your Comment");
+        if (!stop) {
+          return 0;
+        }
 
         e.preventDefault();
 
@@ -166,18 +178,17 @@ export default function Blogs() {
           const data = res.json();
 
           if (res.status === 422 || !data) {
-            window.alert("connot Delete comment");
+            window.alert("Cannot delete comment");
           } else {
-            window.confirm("Deleting Your Comment");
-
-            // navigate('/dashboard');
+            forceUpdate();
+            console.log("Comment deleted successfuly");
           }
 
         } catch (err) {
           console.log(err);
           // navigate('/dashboard');
         }
-        window.location.reload();
+        // window.location.reload();
       }} className="btn btn-outline-danger btn-sm mx-2">
         <i className="zmdi zmdi-delete"></i>
       </button>
@@ -202,6 +213,14 @@ export default function Blogs() {
                   {/* Blog Like button */}
                   <div className='p-2 bd-highlight'>
                     <button type="button" onClick={async (e) => {
+                      if (impData.error && impData.error === "unauthorized") {
+                        const stop = window.confirm("You Have To Register");
+                        if (!stop) {
+                          return 0;
+                        } else {
+                          navigate("/register");
+                        }
+                      }
 
                       e.preventDefault();
 
@@ -224,9 +243,8 @@ export default function Blogs() {
                           window.alert("Invalid Blog");
                           console.log("Invalid Blog");
                         } else {
-                          window.alert("Blog saved successfuly");
-                          console.log("Blog saved successfuly");
-
+                          console.log("like/dislike successful");
+                          forceUpdate();
                           // navigate('/dashboard');
                         }
 
@@ -278,17 +296,17 @@ export default function Blogs() {
           </div>
           <div className="col-md-4">
             <h4 className='text-center my-5'>Recommendation For You</h4>
-            {userBlogs.slice(0,3).map((item)=>(
+            {userBlogs.slice(0, 3).map((item) => (
 
-            <div className="card shadow mx-auto" >
-              <div className="card-body">
-                <h5 className="card-title">{item.title ? item.title.slice(0, 40) : ""}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">{item.topic}</h6>
-                <p className="card-text" dangerouslySetInnerHTML={{ __html: item.content.slice(0,20) + " ..." }} />
-                {/* <p className="card-text">content...</p> */}
-                <Link to={"/blogs/" + item._id} className="btn btn-sm btn-outline-primary rounded-pill">Read More</Link>
+              <div className="card shadow mx-auto" >
+                <div className="card-body">
+                  <h5 className="card-title">{item.title ? item.title.slice(0, 40) : ""}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">{item.topic}</h6>
+                  <p className="card-text" dangerouslySetInnerHTML={{ __html: item.content.slice(0, 20) + " ..." }} />
+                  {/* <p className="card-text">content...</p> */}
+                  <Link to={"/blogs/" + item._id} className="btn btn-sm btn-outline-primary rounded-pill">Read More</Link>
+                </div>
               </div>
-            </div>
             ))}
           </div>
         </div>
